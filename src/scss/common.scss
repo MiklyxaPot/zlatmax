@@ -6,11 +6,15 @@
    }
 
    &__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      
       &:not(:last-child) {
          @include adaptiveValue("margin-bottom",50 ,30 );
+      }
+      @media (min-width:$mobile){
+           display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: rem(20);
       }
    }
 
@@ -51,8 +55,9 @@
    }
 
    &__wrapper {
-&:not(:last-child) {margin-bottom: rem(50);}//мужду слайдером и дотс
-      
+&:not(:last-child) {
+   @include adaptiveValue("margin-bottom", 50, 30 );//мужду слайдером и дотс
+   }
    }
 
    &__slide {
@@ -315,7 +320,10 @@
 
 		&__content {
          min-width: 0;
-       padding: rem(37) 0px 0px 0px;
+      
+       @media (min-width:$tablet){
+            padding: rem(37) 0px 0px 0px;
+       }
 		}
 
 
