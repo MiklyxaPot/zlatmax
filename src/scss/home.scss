@@ -1,0 +1,449 @@
+//====================================================================================================
+
+.main-block {
+     background: url('@img/main-page/main-block/bg.jpg') center/cover no-repeat;
+     @include adaptiveValue("padding-top", 50, 40);
+     @include adaptiveValue("padding-bottom", 60, 40);
+   &__container {
+   }
+
+   &__body {
+      display: grid;
+      align-items: start;//прижал элементы к верху
+      //percent это миксин который считаки проценты, 636 это ширина кортинки, 1600 шерина контенткой части 
+      row-gap: rem(40);
+      &:not(:last-child) {
+         @include adaptiveValue("margin-bottom", 43, 30); 
+      }
+      @media (min-width:$tablet){
+         grid-template-columns: 1fr percent(636, 1600);
+ 
+      }
+   }
+
+   &__slider {
+      margin:  0px rem(-30);
+      padding: 0px rem(30);//чтобы не прижималосб -мфржин и +паддинг
+  
+   }
+// бывший swaper
+   &__wrapper {
+      &:not(:last-child) {
+         margin-bottom: rem(30);//дал оболочке нижний маржин чтобы кнопки опустились
+        }
+   }
+
+   &__slide {
+
+   }
+
+   &__media {
+   }
+
+   &__advantares {
+   }
+
+
+   &__controll {
+   }
+}
+.controll-main-block {
+   display: inline-grid;
+   grid-auto-flow: column;
+   align-items: center;
+   gap: rem(20);
+
+   &__dotts {
+      display: inline-grid;
+      grid-auto-flow: column;
+      gap: rem(20);
+      transform: translate(0px,10%);//чуть полоски сместили ниже,
+      .swiper-pagination-bullet{
+         cursor: pointer;
+         height: rem(30);
+          width: rem(18);
+          position: relative;
+          transition: all 0.3s ease 0s;
+
+          &::before{
+            content:'';
+            background-color: $mainOrange;
+            position: absolute;//делаем м позиционируем кружочек
+            height: rem(10);
+            width: rem(10);
+            top: 50%;
+            left: 0;
+            border-radius:50%;
+            transform: translate(0px,-50%);//кружочек слево черты
+            opacity: 0;
+         }
+         &::after{
+            content:'';
+            height: rem(2);
+              position: absolute;
+              width: 100%;
+              top: 50%;
+              transform: translate(0px,-50%);
+            background-color:#fff;
+         }
+      }
+      .swiper-pagination-bullet-active{
+         width: rem(30); //активный будет в два раза длинее
+         &::after{
+            content:'';
+              background-color: $mainOrange;
+         }
+         &::before{
+            opacity: 1;//становится видно кружочек у активного
+            left: rem(20);
+            transition: left 2.5s linear 0s;//кружочек двигается по линии за 2.5 секунд, типо таймер
+
+         }
+
+ 
+      }
+   }
+
+   &__fraction {
+ 
+}
+
+.fraction-controll {
+   display: flex;
+   color: #fff;
+   align-items: flex-end;
+   font-weight: 600;
+   letter-spacing: 0.3em;
+
+   &__current {
+      font-size: rem(24);
+      color: $mainOrange;
+   }
+
+   &__all {
+      font-size: rem(18);
+   }
+}
+}
+.slide-main-block {
+
+   &__content {
+      color: #fff;
+      &:not(:last-child) {
+         @include adaptiveValue("margin-bottom",60 ,30 );
+         // отступ ОТ  кнопки
+      }
+      @media (min-width:$tablet){
+         padding:  0px rem(40) 0px 0px;//отступ безопасности нужен только шире таблела, потом все в колонку
+      }
+      // 
+   }
+
+   &__title {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      line-height: math.div(46 , 36);
+      @include adaptiveValue("font-size", 36, 22, 992, 320, 1);// шрифт будет после 992рх до 320рх уменьшатся до 22 
+      &:not(:last-child) {
+         // если останется один, тоесть последний мержин удвлится
+         margin-bottom: em(15, 36);
+         // мержин опирается на размер шрифте, ем это относительная еденица 15 это отступ по макету, 36 размер шрифта
+      }
+   }
+
+   &__sub-title {
+      @include adaptiveValue("font-size", 36, 22, 992, 320, 1);
+      line-height: math.div(46 , 36);
+      &:not(:last-child) {
+         margin-bottom: em(30, 36);
+      }
+   }
+
+   &__text {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: math.div(30 , 20 );
+      @include adaptiveValue("font-size", 20, 16, 992, 320, 1);
+}
+
+
+   &__button {
+      @media (max-width:$mobileSmall){
+           width: 100%;//увеличиваем кнопку на всю ширину
+      }
+   }
+
+
+
+
+}
+.media-main-block {
+   display: flex;
+   justify-content: center;
+   align-items: center; 
+   padding: rem(15);
+   // отступы безопасности 
+   &__body {
+      position: relative;
+      
+   }
+
+   &__image {
+     
+      &::before{
+         content:'';
+         // сверстаем круг
+         width: percent(423,449);
+         padding-bottom: percent(423,449);//проценты высчитываются от ширины родителя
+         border:2px solid rgba(255, 255, 255, 0.5);
+         border-radius:50%;
+         position: absolute;
+         // относительно родителя,. прижат к низу и справа
+         bottom: 2%;
+         right: 0;
+         // теперь круг сместить/ 131 на сколькосмешен, 423 размер круша, процент смещение считается
+        transform: translate(percent(131,423),0px);
+      }
+      img{
+         position: relative;
+         z-index: 2;
+         max-width: 100%;
+      }
+   }
+
+
+
+
+   &__tips {
+      // делаем на всю ширину и высту обьекта
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+   }
+
+   &__tip {
+      // делаем маленькие кружочки и позиционируекм их
+      position: absolute;
+      // это их размер
+      width: rem(20);
+      height: rem(20);
+      cursor: pointer;
+      z-index: 5;
+      transition: transform 0.3s ease 0s;
+      @media (any-hover: hover){
+         &:hover{
+            // плюсик будет крутится
+            transform: rotate(-180deg);
+         }
+      }
+     &::before,&::after{
+      content:'';
+      border-radius:50%;
+      background-color: $mainOrange;
+      // позицтя относительно родителя
+      position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+     }
+     &::after{
+      opacity: 0.5;
+      // 
+      transform: scale(1.6);
+     }
+     span{
+      // position: relative;
+      z-index: 2;
+      font-weight: 600;
+      font-size: rem(20);
+      color: #FFFFFF;
+      position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+     }
+      &_1 {
+         // процент сверху на всю длину
+         top: percent(186,500);
+         // слева на всю ширину
+         left: percent(70,477);
+      }
+
+      &_2 {
+         top: percent(65,500);
+         right: percent(13,477);
+        
+      }
+
+      &_3 {
+         top: percent(362,500);
+         right: percent(30,477);
+      }
+   }
+
+   &__tip
+{
+   }
+}
+.advantares-main {
+   display: grid;
+   grid-template-columns: repeat(4, auto);//выстраивает сетку по 4 колонки
+   gap: rem(20);
+   justify-content: space-between;
+   @media (max-width:$tablet){
+      row-gap: rem(30);//отступ нижний между колонками
+      grid-template-columns: repeat(2, 1fr); //уже по 2 колонки
+      justify-items: center;//выстраиваются по центру, без большого отступа
+ 
+   }
+   @media (max-width:$mobile){
+      grid-template-columns: repeat(1, 1fr); //уже по 1 колонки
+  
+   }
+
+   &__item {
+      display: inline-grid;
+      gap: rem(17);
+      text-align: center; 
+      max-width: rem(280);  
+      grid-template-rows: 77px auto;//чтобы иконки ровно в ряд, 77рх высота самой высокой
+   }
+
+   &__icon {
+      align-items: center;
+   }
+
+   &__tex {
+      color: #fff;
+      font-weight: 600;
+      font-size: rem(20);
+      line-height: math.div(32 , 20); 
+
+     }
+}
+
+//====================================================================================================
+
+.cards-catalog {
+   @include adaptiveValue("padding-top", 100 ,40 );
+   @include adaptiveValue("padding-bottom", 70 ,40 );
+
+   &__container { 
+      display: grid;
+      gap: rem(30);
+      @media (min-width:$mobileSmall){
+            grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));//авто адаптив, благодаря этому карточки адаптивно сжимаются
+      }
+   }
+
+   &__item {
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+   }
+}
+.item-cards-catalog {
+   overflow: hidden;
+   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+   min-height: rem(290);
+   position: relative;
+   transition: box-shadow 0.3s ease 0s;
+   @media (any-hover: hover){
+      &:hover{
+         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+      }
+   }
+
+   &__body {
+      position: relative;  
+      z-index: 2;
+      @include adaptiveValue("padding", 30 ,15 );
+
+   }
+
+   &__title {
+      &:not(:last-child) {
+         margin-bottom: em(34, 24);
+      }
+   }
+
+   &__link-title {
+      font-weight: 600;
+      font-size: rem(24);
+      line-height: math.div(34 ,24 );
+      display: inline-block;
+     
+      &::after{
+         content:'';
+         width: rem(70);
+         height: rem(2);
+         display: block;
+         background: $mainOrange;
+         transition: width 0.3s ease 0s; 
+         margin:  rem(15) 0px 0px 0px;
+         
+      }
+      @media (any-hover: hover){
+         &:hover{
+            &::after{
+               width: 100%;
+            }
+         }
+      }
+   }
+
+   &__list {
+   }
+
+   &__item {
+      position: relative;
+      padding: 0px 0px 0px rem(20);
+   
+      &::before{
+         content:'';
+         position: absolute;
+         width: rem(6);
+         height: rem(6);
+         border-radius:50%;
+         background: $mainOrange;
+         left: 0;
+         top: em(8,18);  
+     
+      }
+      &:not(:last-child) {
+         margin-bottom: rem(10);
+      }
+   }
+
+   &__link {
+      font-size: rem(18);
+      line-height: math.div(24 , 18);
+      @media (any-hover: hover){
+      &:hover{
+         text-decoration: underline;
+      }
+}
+      
+   }
+
+   &__img {
+      width: 100%;
+      text-align: right; 
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      transform: translate(0px,8%);//чтобыкартинки немного вниз утопли
+      img{
+         max-width: 100%;
+      }
+      @media (min-width:$mobileSmall){
+           position: absolute;
+            height: 100%;
+            top: 0;
+            right: 0;
+      }
+   }
+}
+// =================================================================================
+
+
+.hits-products {
+   @include adaptiveValue("padding-top", 50 ,40 );
+   @include adaptiveValue("padding-bottom", 120 ,40 );
+}
